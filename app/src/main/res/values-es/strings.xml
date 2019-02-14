@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Pain</string>
+    <string name="start_new">Nuevo</string>
+    <string name="brush">Pincel</string>
+    <string name="erase">Borrador</string>
+    <string name="save">Guardar</string>
+    <string name="paint">Pintar</string>
+    <string name="save_drawing">Guardar Dibujo</string>
+    <string name="saveGallery">"¿Guardar dibujo en la galería del dispositivo?"</string>
+    <string name="cancel">Cancelar</string>
+    <string name="yes">SI</string>
+    <string name="new_drawing">Nuevo dibujo</string>
+    <string name="start_newd">¿Comenzar nuevo dibujo (perderá el dibujo actual)?</string>
+    <string name="successful_save">Dibujo guardado en la galería!</string>
+    <string name="error_save">Ups! La imagen no se pudo guardar.</string>
+</resources>
