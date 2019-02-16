@@ -3,6 +3,7 @@ package apps.dev.simplepaint;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.internal.NavigationMenu;
@@ -61,6 +62,9 @@ public class MainActivity extends Activity  {
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE);
 
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -121,11 +125,11 @@ public class MainActivity extends Activity  {
             }
         });
 
+
         if (savedInstanceState != null){
-            drawView.setSerializable((PathSerializable) savedInstanceState.getParcelable(KEY_DRAW));
+
+            drawView.setCanvasBitmap((Bitmap) savedInstanceState.getParcelable(KEY_DRAW));
         }
-
-
 
     }
 
@@ -241,8 +245,8 @@ public class MainActivity extends Activity  {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 
-        outState.putParcelable(KEY_DRAW,drawView.getSerializable());
-
+        //this method is for save paints and colors
+        outState.putParcelable(KEY_DRAW, drawView.getCanvasBitmap());
         super.onSaveInstanceState(outState);
 
     }
@@ -264,14 +268,16 @@ public class MainActivity extends Activity  {
         sizeBrush = brushDialog.findViewById(R.id.sizeB);
         Button setSizeBtn = brushDialog.findViewById(R.id.setSizeB);
         brushDialog.show();
-        sizeBrush.setText(String.valueOf(sizeb)+" px");
+        String p = Integer.toString(sizeb).concat(" px");
+        sizeBrush.setText(p);
         seekBar.setProgress(sizeb);
         // perform seek bar change listener event used for getting the progress value
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 sizeb = progress;
-                sizeBrush.setText(String.valueOf(sizeb)+" px");
+                String p = Integer.toString(sizeb)+" px";
+                sizeBrush.setText(p);
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {

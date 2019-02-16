@@ -19,25 +19,6 @@ public class DrawingView extends View {
     private float brushSize, lastBrushSize;
     private boolean erase=false;
 
-    PathSerializable serializable;
-
-    public PathSerializable getSerializable() {
-
-        serializable = new PathSerializable(drawPath, drawCanvas, paintColor);
-
-        return serializable;
-    }
-
-    public void setSerializable(PathSerializable serializable) {
-
-        this.serializable = serializable;
-
-        drawPath = serializable.getPath();
-        drawCanvas = serializable.getCanvas();
-        paintColor = serializable.getPaintColor();
-
-        invalidate();
-    }
 
     private  OnTouchScreen onTouchScreen;
 
@@ -69,14 +50,30 @@ public class DrawingView extends View {
         brushSize = getResources().getInteger(R.integer.small_size);
         lastBrushSize = brushSize;
         drawPaint.setStrokeWidth(brushSize);
+        canvasBitmap = null;
 
     }
+
+    public Bitmap getCanvasBitmap() {
+        return canvasBitmap;
+    }
+
+    public void setCanvasBitmap(Bitmap canvasBitmap) {
+        this.canvasBitmap = canvasBitmap;
+        invalidate();
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
 
+        if (canvasBitmap == null)
+            canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        else
+            canvasBitmap = Bitmap.createScaledBitmap(canvasBitmap, w, h, false);
+
+        drawCanvas = new Canvas(canvasBitmap);
+        Log.i("Log: ", "Entro a onSizeChanged");
 
     }
 
