@@ -17,7 +17,6 @@ public class DrawingView extends View {
     //canvas bitmap
     private Bitmap canvasBitmap;
     private float brushSize, lastBrushSize;
-    private boolean erase=false;
 
 
     private  OnTouchScreen onTouchScreen;
@@ -33,10 +32,6 @@ public class DrawingView extends View {
         this.onTouchScreen = onTouchScreen;
     }
 
-    public Path getDrawCanvas() {
-        return drawPath;
-    }
-
     private void setupDrawing(){
         drawPath = new Path();
         drawPaint = new Paint();
@@ -47,7 +42,7 @@ public class DrawingView extends View {
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
         canvasPaint = new Paint(Paint.DITHER_FLAG);
-        brushSize = getResources().getInteger(R.integer.small_size);
+        brushSize = 10;
         lastBrushSize = brushSize;
         drawPaint.setStrokeWidth(brushSize);
         canvasBitmap = null;
@@ -64,8 +59,8 @@ public class DrawingView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldWidth, int oldHigh) {
+        super.onSizeChanged(w, h, oldWidth, oldHigh);
 
         if (canvasBitmap == null)
             canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
@@ -129,7 +124,7 @@ public class DrawingView extends View {
     }
 
     public void setErase(boolean isErase){
-        erase=isErase;
+        boolean erase = isErase;
         if(erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         else drawPaint.setXfermode(null);
     }
@@ -137,7 +132,5 @@ public class DrawingView extends View {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
-
-
 
 }

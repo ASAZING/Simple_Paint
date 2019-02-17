@@ -39,7 +39,7 @@ public class MainActivity extends Activity  {
     private MyCountDownTimer countDownTimer;
     private FabSpeedDial fabSpeedDial;
     private TextView sizeBrush;
-    private int sizeb = 30;
+    private int size = 10;
     public static final int REQUEST_STORAGE = 47;
 
     @Override
@@ -268,15 +268,15 @@ public class MainActivity extends Activity  {
         sizeBrush = brushDialog.findViewById(R.id.sizeB);
         Button setSizeBtn = brushDialog.findViewById(R.id.setSizeB);
         brushDialog.show();
-        String p = Integer.toString(sizeb).concat(" px");
+        String p = Integer.toString(size).concat(" px");
         sizeBrush.setText(p);
-        seekBar.setProgress(sizeb);
+        seekBar.setProgress(size);
         // perform seek bar change listener event used for getting the progress value
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                sizeb = progress;
-                String p = Integer.toString(sizeb)+" px";
+                size = progress;
+                String p = Integer.toString(size)+" px";
                 sizeBrush.setText(p);
             }
 
@@ -293,13 +293,13 @@ public class MainActivity extends Activity  {
             public void onClick(View view) {
                 if(dialogI == 1){
 
-                    drawView.setBrushSize(sizeb);
-                    drawView.setLastBrushSize(sizeb);
+                    drawView.setBrushSize(size);
+                    drawView.setLastBrushSize(size);
                     drawView.setErase(false);
 
                 }else if(dialogI == 2){
                     drawView.setErase(true);
-                    drawView.setBrushSize(sizeb);
+                    drawView.setBrushSize(size);
                 }
                 brushDialog.dismiss();
             }
