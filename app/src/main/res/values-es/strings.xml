@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Simple Pain</string>
+    <string name="app_name">Simple Paint</string>
     <string name="start_new">Nuevo</string>
     <string name="brush">Pincel</string>
     <string name="erase">Borrador</string>

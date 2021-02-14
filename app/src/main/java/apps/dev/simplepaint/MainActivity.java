@@ -140,8 +140,8 @@ public class MainActivity extends Activity  {
                 ImageButton imgView = (ImageButton) view;
                 String color = view.getTag().toString();
                 drawView.setColor(color);
-                imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-                currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+                imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed, null));
+                currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint, null));
                 currPaint = (ImageButton) view;
                 drawView.setBrushSize(drawView.getLastBrushSize());
             }
@@ -197,11 +197,11 @@ public class MainActivity extends Activity  {
         newDialog.show();
     }
 
-    private void anim(int a){
+    private void anim(int animation){
         Animation scale = AnimationUtils.loadAnimation(this, R.anim.scale);
         Animation rescale = AnimationUtils.loadAnimation(this, R.anim.rscale);
 
-        if(a==1){
+        if(animation==1){
             if(fabSpeedDial.getVisibility() == View.GONE || colorOp.getVisibility() == View.GONE) {
                 fabSpeedDial.setVisibility(View.VISIBLE);
                 colorOp.setVisibility(View.VISIBLE);
@@ -209,7 +209,7 @@ public class MainActivity extends Activity  {
                 colorOp.startAnimation(scale);
                 countDownTimer.start();
             }
-        }else if (a == 2){
+        }else if (animation == 2){
             if(fabSpeedDial.getVisibility() == View.VISIBLE || colorOp.getVisibility() == View.VISIBLE){
                 fabSpeedDial.startAnimation(rescale);
                 colorOp.startAnimation(rescale);
@@ -251,13 +251,13 @@ public class MainActivity extends Activity  {
 
     }
 
-    private void showD(int d){
-        final int dialogI = d;
+    private void showD(int dialogTitle){
+        final int dialogI = dialogTitle;
         String title= "";
-        final Dialog brushDialog = new Dialog(this);
-        if(d == 1){
+        final Dialog brushDialog = new Dialog(this, R.style.Dialog);
+        if(dialogTitle == 1){
             title = "Tamaño del pincel :";
-        }else if(d == 2){
+        }else if(dialogTitle == 2){
             title = "Tamaño del borrador :";
 
         }
